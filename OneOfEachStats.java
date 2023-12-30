@@ -8,22 +8,51 @@ import java.util.Random;
  *  Example usage: % java OneOfEachStats 1000 1
  */
 public class OneOfEachStats {
-	public static void main (String[] args) {
-		// Gets the two command-line arguments
-		int T = Integer.parseInt(args[0]);
-		int seed = Integer.parseInt(args[1]);
-		// Initailizes a random numbers generator with the given seed value
+	public static void main (String[] asdf) {
+		int n = Integer.parseInt(asdf[0]);
+		int seed = Integer.parseInt(asdf[1]);
         Random generator = new Random(seed);  
-		
-		//// In the previous version of this program, you used a statement like:
-		//// double rnd = Math.random();
-		//// Where "rnd" is the variable that stores the generated random value.
-		//// In this version of the program, replace this statement with:
-		//// double rnd = generator.nextDouble();
-		//// This statement will generate a random value in the range [0,1),
-		//// just like you had in the previous version, except that the 
-		//// randomization will be based on the given seed.
-		//// This is the only change that you have to do in the program.
+		// All Experiments
+		float allKids = 0;
+		int kids2 = 0;
+		int kids3 = 0;
+		int kids4 = 0;
+		for (int i=0; i<n; i++) {
+			// One Experiment
+			int kids = 0;
+			boolean isBoy = false;
+			boolean isGirl = false;
+			do {
+				allKids++;
+				kids++;
+				if ((int)(generator.nextDouble()*(2)) == 1) {
+					isBoy=true;
+				} else {
+					isGirl=true;
+				}
+			} while (!isBoy || !isGirl);
+			switch (kids) {
+				case 2: kids2++;break;
+				case 3: kids3++;break;
+				case 4: kids4++;break;
+				default: kids4++;break;
+			}
+		}
+		// Results
+		System.out.println("Average: " + allKids/n + " children to get at least one of each gender.");
+		System.out.println("Number of families with 2 children: " + kids2);		
+		System.out.println("Number of families with 3 children: " + kids3);
+		System.out.println("Number of families with 4 or more children: " + kids4);
+		int maxKids = Math.max(kids2, Math.max(kids3, kids4));
+		String mode;
+		if (maxKids == kids2) {
+			mode = "2";
+		} else if (maxKids == kids3) {
+			mode = "3";
+		} else {
+		mode = "4 or more";
+		}
+		System.out.println("The most common number of children is " + mode);
 		    
 	}
 }
