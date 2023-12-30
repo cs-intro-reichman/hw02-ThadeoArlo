@@ -47,6 +47,6 @@ public class OneOfEachStats1 {
 		} else {
 		mode = "4 or more";
 		}
-		System.out.println("The most common number of children is " + mode);
+		System.out.println("The most common number of children is " + mode + ".");
 	}
 }
